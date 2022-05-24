@@ -11,7 +11,7 @@ setuptools.setup(
     description="A package for running the cell polarity model",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/jasnyder/polar",
+    url="https://github.com/jasnyder/polarpkg",
     project_urls={},
     classifiers=[
         "Programming Language :: Python :: 3",
