@@ -8,6 +8,8 @@ To download and install this package, you can do:
 2. Run `gh repo clone jasnyder/polarpkg`
 3. Run `python3 -m pip install .`
 
+You can pass the `-e` flag to pip (i.e. run `python3 -m pip install -e .`), which will install the package in "editable" mode. This means that you can make changes to the source code and these changes will be immediately reflected in the code's behavior, without having to re-run `pip install`.
+
 This should install the package. You should then be able to import it in Python by doing
 ```python
 import polaritymodel
