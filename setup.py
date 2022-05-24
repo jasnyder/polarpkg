@@ -19,6 +19,16 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     package_dir={"": "src"},
+    install_requires=[
+        'torch',
+        'torchaudio',
+        'torchvision',
+        'pickle',
+        'numpy',
+        'scipy',
+        'plotly',
+        'pandas'
+    ],
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
 )
