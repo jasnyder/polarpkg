@@ -7,7 +7,7 @@ Code (the bulk of `polarcore.py`) comes from this repo: [https://github.com/juli
  - Kirkegaard, J. B., Nielsen, B. F., Trusina, A., & Sneppen, K. (2019). Self-assembly, buckling and density-invariant growth of three-dimensional vascular networks. Journal of The Royal Society Interface, 16(159), 20190517. https://doi.org/10.1098/rsif.2019.0517
  - Nielsen, B. F., Nissen, S. B., Sneppen, K., Mathiesen, J., & Trusina, A. (2020). Model to Link Cell Shape and Polarity with Organogenesis. IScience, 23(2), 100830. https://doi.org/10.1016/j.isci.2020.100830
 
-What this code does differently is to incorporate the 
+What this code does differently to what came before is to incorporate the effects of WNT expression on the orientation of planar cell polarity (PCP). WNT is a protein that has been observed to be important in organ formation, and in particular the formation of branched structures such as in the kidney, the lung, and salivary glands. We hypothesize that gradients of WNT expression act to orient PCP cyclically, promoting the formation and branching of stable tubular structures. Prior work has considered a two-dimensional model of organ formation, without PCP. We argue that PCP is key to understanding the role of WNT in branching for three-dimensional organs.
 
 # Installation
 To download and install this package, you can do:
