@@ -57,3 +57,17 @@ for line in itertools.islice(runner, timesteps):
     with open('path/to/data/file.pkl','wb') as fobj:
         pkl.dump(line, fobj)
 ```
+
+## Plotting
+
+Plotting is done via utilities in the `plot` subpackage. The `plot` subpackage has a core set of functions located in the module `plotcore`, and there are other modules to make different types of visualizations, such as 3D animations, heatmaps of ligand density, and PCP vector fields. These can be accessed from within a python script, such as
+```python
+from polaritymodel.plot.plotcore import load, build_df, select
+from polaritymodel.plot.cones_wnt_ligand import plot, save
+...
+```
+or alternatively from the command line, as such:
+```
+python3 -m polaritymodel.plot.cones_wnt
+```
+after which you will receive command-line prompts for the filename of the data set you wish to plot, and other relevant options.
