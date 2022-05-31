@@ -182,9 +182,9 @@ class Polar:
             k = self.k
         x = self.x.detach().to('cpu').numpy()
         tree = KDTree(x)
-        d, idx = tree.query(x, k + 1, distance_upper_bound=distance_upper_bound, n_jobs=workers)
+        d, idx = tree.query(x, k + 1, distance_upper_bound=distance_upper_bound, workers=workers)
         self.d = torch.tensor(d[:, 1:], dtype=torch.long, device=self.device)
-        self.idx = torch.tensor(idx[:, 1:], dtype=self.dtype, device=self.device)
+        self.idx = torch.tensor(idx[:, 1:], dtype=torch.long, device=self.device)
         
     def find_true_neighbours(self):
         """

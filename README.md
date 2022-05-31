@@ -1,6 +1,13 @@
 This is a pip-installable package containing all the code needed to run the cell polarity model, with all the modifications I've made of it.
 
-Code (the bulk of `polarcore.py`) comes from this repo: [https://github.com/juliusbierk/polar](https://github.com/juliusbierk/polar)
+Code (the bulk of `polarcore.py`) comes from this repo: [https://github.com/juliusbierk/polar](https://github.com/juliusbierk/polar). Prior work on this model can be found in these publications:
+
+ - Nissen, S. B., Perera, M., Gonzalez, J. M., Morgani, S. M., Jensen, M. H., Sneppen, K., Brickman, J. M., & Trusina, A. (2017). Four simple rules that are sufficient to generate the mammalian blastocyst. PLoS Biology, 15(7), 1–30. https://doi.org/10.1371/journal.pbio.2000737
+ - Nissen, S. B., Rønhild, S., Trusina, A., & Sneppen, K. (2018). Theoretical tool bridging cell polarities with development of robust morphologies. ELife, 7, 1–25. https://doi.org/10.7554/eLife.38407
+ - Kirkegaard, J. B., Nielsen, B. F., Trusina, A., & Sneppen, K. (2019). Self-assembly, buckling and density-invariant growth of three-dimensional vascular networks. Journal of The Royal Society Interface, 16(159), 20190517. https://doi.org/10.1098/rsif.2019.0517
+ - Nielsen, B. F., Nissen, S. B., Sneppen, K., Mathiesen, J., & Trusina, A. (2020). Model to Link Cell Shape and Polarity with Organogenesis. IScience, 23(2), 100830. https://doi.org/10.1016/j.isci.2020.100830
+
+What this code does differently is to incorporate the 
 
 # Installation
 To download and install this package, you can do:
