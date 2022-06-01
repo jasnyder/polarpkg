@@ -1,9 +1,5 @@
 import plotly.graph_objects as go
-
-try:
-    from .plotcore import load, build_df, select
-except ModuleNotFoundError:
-    from plotcore import load, build_df, select
+from .plotcore import load, build_df, select
 
 def plot(df):
     fig = go.Figure(data=[go.Cone(

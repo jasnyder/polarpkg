@@ -1,8 +1,6 @@
 import plotly.express as px
-try:
-    from .plotcore import load, build_df_wnt
-except:
-    from plotcore import load, build_df_wnt
+from .plotcore import load, build_df
+
 
 
 def plot(df, color = 'w'):
@@ -29,6 +27,6 @@ if __name__ == '__main__':
     fname = input('Enter data filename (default: most recent): ') or 'most recent' # 'data/test1.pkl'
     color = input('color by? (default: w) ') or 'w'
     data, kwargs, fname = load(fname)
-    df, kwargs = build_df_wnt(data, kwargs)
+    df, kwargs = build_df(data, kwargs)
     fig = plot(df, color=color)
     save(fig, fname)

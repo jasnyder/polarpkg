@@ -1,10 +1,5 @@
-from unittest import skip
 import plotly.express as px
-try:
-    from .plotcore import load, build_df_wnt
-except ModuleNotFoundError:
-    from plotcore import load, build_df_wnt
-
+from .plotcore import load, build_df
 
 def plot(df, color = 'w'):
     range_x = (df['x1'].min(), df['x1'].max())
@@ -30,6 +25,6 @@ if __name__ == '__main__':
     skipframes = input('plot ever n frames? (default: 1) ') or 1
     color = input('color by? (default: w) ') or 'w'
     data, kwargs, fname = load(fname)
-    df, kwargs = build_df_wnt(data, kwargs, skipframes = int(skipframes))
+    df, kwargs = build_df(data, kwargs, skipframes = int(skipframes))
     fig = plot(df, color=color)
     save(fig, fname)

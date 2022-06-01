@@ -1,6 +1,6 @@
 import plotly.express as px
 
-from .plotcore import load, build_dfs_wnt_ligand_counts
+from .plotcore import load, build_df
 
 
 def plot(df, color = 'w'):
@@ -27,6 +27,6 @@ if __name__ == '__main__':
     fname = input('Enter data filename (default: most recent): ') or 'most recent' # 'data/test1.pkl'
     color = 'count'
     data, kwargs, fname = load(fname)
-    df, df_lig, kwargs = build_dfs_wnt_ligand_counts(data, kwargs)
+    df, df_lig, kwargs = build_df(data, kwargs)
     fig = plot(df, color=color)
     save(fig, fname)

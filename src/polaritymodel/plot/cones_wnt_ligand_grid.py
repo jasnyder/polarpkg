@@ -1,7 +1,4 @@
-try:
-    from .plotcore import load, select, build_dfs_ligand_grid
-except:
-    from plotcore import load, select, build_dfs_ligand_grid
+from .plotcore import load, select, build_df
 import plotly.graph_objects as go
 
 def plot(df):
@@ -30,7 +27,7 @@ if __name__ == "__main__":
     fname = input('Enter data filename (default: most recent): ') or 'most recent'
     T_plot = int(input('timestep to plot: ') or -1)
     data, kwargs, fname = load(fname)
-    df, L, kwargs = build_dfs_ligand_grid(data, kwargs)
+    df, L, kwargs = build_df(data, kwargs)
     df_t = select(df, T_plot, kwargs)
     fig = plot(df_t)
     save(fig, fname)

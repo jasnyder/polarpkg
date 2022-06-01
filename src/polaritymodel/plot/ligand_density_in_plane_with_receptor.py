@@ -1,5 +1,4 @@
-from torch import norm, normal
-from .plotcore import load, build_dfs_wnt_ligand, select
+from .plotcore import load, build_df, select
 
 import pandas as pd
 import numpy as np
@@ -39,7 +38,7 @@ if __name__ == '__main__':
     width = float(input('width? (default: 3)') or 3)
     normal_vector = np.array(eval(vector_input), dtype = 'float')
     data, kwargs, fname = load(fname)
-    _, df_lig, kwargs = build_dfs_wnt_ligand(data, kwargs)
+    _, df_lig, kwargs = build_df(data, kwargs)
     df = select(df_lig, T_plot)
     fig = plot(df, normal_vector, offset, width)
     save(fig, fname, T_plot)

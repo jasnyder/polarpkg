@@ -1,8 +1,5 @@
 import plotly.express as px
-try:
-    from .plotcore import load, build_df
-except ModuleNotFoundError:
-    from plotcore import load, build_df
+from .plotcore import load, build_df
 
 
 def plot(df, color = 'x1'):

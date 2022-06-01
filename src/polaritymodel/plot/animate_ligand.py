@@ -1,10 +1,8 @@
 from unittest import skip
 import plotly.express as px
 
-try:
-    from .plotcore import load, build_dfs_wnt_ligand
-except ModuleNotFoundError:
-    from plotcore import load, build_dfs_wnt_ligand
+from .plotcore import load, build_df
+
 
 
 def plot(df, color = 'x1'):
@@ -31,6 +29,6 @@ if __name__ == '__main__':
     skipframes = input('plot ever n frames? (default: 1) ') or 1
     color = input('color by? (default: x1) ') or 'x1'
     data, kwargs, fname = load(fname)
-    df, df_lig, kwargs = build_dfs_wnt_ligand(data, kwargs, skipframes = int(skipframes))
+    df, df_lig, kwargs = build_df(data, kwargs, skipframes = int(skipframes))
     fig = plot(df_lig, color=color)
     save(fig, fname)

@@ -1,7 +1,7 @@
 """
 This file is to plot the density of ligand in the case that the ligand is modeled by a PDE instead of particles
 """
-from .plotcore import load, build_dfs_ligand_grid
+from .plotcore import load, build_df
 import plotly.express as px
 
 
@@ -19,7 +19,7 @@ def save(fig, fname):
 if __name__ == '__main__':
     fname = input('Enter data filename (default: most recent): ') or 'most recent' # 'data/test1.pkl'
     data, kwargs, fname = load(fname)
-    df, L, kwargs = build_dfs_ligand_grid(data, kwargs)
+    df, L, kwargs = build_df(data, kwargs)
     axis = int(input('axis along which to slice? default 1') or 1)
     index = int(input('which slice to take? (default: halfway) ') or L.shape[-1]/2)
     fig = plot(L, axis, index)
