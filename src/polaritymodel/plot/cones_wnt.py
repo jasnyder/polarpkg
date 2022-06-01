@@ -28,7 +28,7 @@ if __name__ == "__main__":
     fname = input('Enter data filename: ')  # 'data/test1.pkl'
     T_plot = int(input('timestep to plot: ') or -1)
     data, kwargs, fname = load(fname)
-    df, kwargs = build_df(data, kwargs)
+    df, _, kwargs = build_df(data, kwargs)
     df_t = select(df, T_plot, kwargs)
     fig = plot(df_t)
     save(fig, fname)
