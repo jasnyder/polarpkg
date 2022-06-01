@@ -25,6 +25,6 @@ if __name__ == '__main__':
     skipframes = input('plot ever n frames? (default: 1) ') or 1
     color = input('color by? (default: w) ') or 'w'
     data, kwargs, fname = load(fname)
-    df, kwargs = build_df(data, kwargs, skipframes = int(skipframes))
+    df, _, kwargs = build_df(data, kwargs, skipframes = int(skipframes))
     fig = plot(df, color=color)
     save(fig, fname)

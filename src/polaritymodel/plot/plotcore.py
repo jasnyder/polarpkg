@@ -28,22 +28,36 @@ def load(fname):
     return data, kwargs, fname
 
 def build_df(data, kwargs=None):
-    if len(data)==4:
+    """
+    case switcher to inspect data and choose the appropriate dataframe constructor
+    it will always return a 3-tuple of values, but the middle one may be None (if the simulation had no ligand information)
+    
+    INPUT:
+        data = a list of tuples containing simulation data, should come from the output of load()
+        kwargs = a dictionary of keyword arguments, also from load
+
+    OUTPUT:
+        df = pandas DataFrame with columns named appropriately to the data that were passed in
+        L or df_lig = 3d numpy array or separate pandas DataFrame defining the ligand distribution, either as a 3d grid of concentration values or a (T*Mx3) dataframe of particle positions
+                      if the data did not have ligand information, this return value will be None
+        kwargs = pass-through of the kwargs that were inputted
+    """
+    if len(data[0])==4:
         # data came from a Polar instance
         # variables are x, p, q, lam
         return build_df_plain(data, kwargs)
-    elif len(data)==5:
+    elif len(data[0])==5:
         # data came from a PolarWNT instance
         # variables are x, p, q, w, lam
         return build_df_wnt(data, kwargs)
-    elif len(data)==6:
+    elif len(data[0])==6:
         # data came from either a PolarPDE instance or a PolarPattern instance without the 'counts' option
         # to differentiate check the shape of the final entry
-        if data[-1].ndim==3:
+        if data[0][-1].ndim==3:
             return build_dfs_ligand_grid(data, kwargs)
         else:
             return build_dfs_wnt_ligand(data, kwargs)
-    elif len(data)==7:
+    elif len(data[0])==7:
         # data came from a PolarPattern instance, including 'counts'
         # variables are x, p, q, w, lam, L, counts
         return build_dfs_wnt_ligand_counts(data, kwargs)
@@ -62,7 +76,7 @@ def build_df_plain(data, kwargs=None):
 
     df = pd.DataFrame(np.vstack(row_chunks), columns=[
                       't', 'i', 'x1', 'x2', 'x3', 'p1', 'p2', 'p3', 'q1', 'q2', 'q3'])
-    return df, kwargs
+    return df, None, kwargs
 
 def build_df_wnt(data, kwargs=None, skipframes=1):
     row_chunks = list()
@@ -78,7 +92,7 @@ def build_df_wnt(data, kwargs=None, skipframes=1):
 
     df = pd.DataFrame(np.vstack(row_chunks), columns=[
                       't', 'i', 'x1', 'x2', 'x3', 'p1', 'p2', 'p3', 'q1', 'q2', 'q3', 'w'])
-    return df, kwargs
+    return df, None, kwargs
 
 def build_dfs_wnt_ligand(data, kwargs=None, skipframes=1):
     row_chunks = list()

@@ -25,6 +25,6 @@ if __name__ == '__main__':
     fname = input('Enter data filename: ')  # 'data/test1.pkl'
     color = input('color by? (default: x1) ') or 'x1'
     data, kwargs, fname = load(fname)
-    df, kwargs = build_df(data, kwargs)
+    df, _, kwargs = build_df(data, kwargs)
     fig = plot(df, color=color)
     save(fig, fname)
