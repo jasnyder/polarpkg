@@ -22,7 +22,7 @@ def save(fig, fname):
 
 
 if __name__ == '__main__':
-    fname = input('Enter data filename: ')  # 'data/test1.pkl'
+    fname = input('Enter data filename (default: most recent): ') or 'most recent'
     color = input('color by? (default: x1) ') or 'x1'
     data, kwargs, fname = load(fname)
     df, _, kwargs = build_df(data, kwargs)

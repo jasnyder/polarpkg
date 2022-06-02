@@ -1,17 +1,16 @@
-from .plotcore import load, build_df, select
+from .plotcore import load, select, build_df
 import plotly.graph_objects as go
 
 def plot(df):
     fig = go.Figure(data=[go.Cone(
-        x=df.loc[df]['x1'],
-        y=df.loc[df]['x2'],
-        z=df.loc[df]['x3'],
-        u=df.loc[df]['q1'],
-        v=df.loc[df]['q2'],
-        w=df.loc[df]['q3'],
+        x=df['x1'],
+        y=df['x2'],
+        z=df['x3'],
+        u=df['q1'],
+        v=df['q2'],
+        w=df['q3'],
         sizemode='absolute',
-        sizeref=2,
-        color=df.loc[df]['w']
+        sizeref=2
     )])
 
     def fun(scene):
@@ -20,12 +19,12 @@ def plot(df):
     fig.for_each_scene(fun)
     return fig
 
-def save(fig):
+def save(fig, fname):
     fig.write_html(fname.replace('data','animations').replace('.pkl','_vectorfield.html'),
                    include_plotlyjs='directory', full_html=False, animation_opts={'frame': {'duration': 100}})
 
 if __name__ == "__main__":
-    fname = input('Enter data filename: ')  # 'data/test1.pkl'
+    fname = input('Enter data filename (default: most recent): ') or 'most recent'
     T_plot = int(input('timestep to plot: ') or -1)
     data, kwargs, fname = load(fname)
     df, _, kwargs = build_df(data, kwargs)

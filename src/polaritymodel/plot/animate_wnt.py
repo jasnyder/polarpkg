@@ -1,8 +1,6 @@
 import plotly.express as px
 from .plotcore import load, build_df
 
-
-
 def plot(df, color = 'w'):
     range_color = (df[color].min(), df[color].max())
     range_x = (df['x1'].min(), df['x1'].max())
@@ -24,7 +22,7 @@ def save(fig, fname):
 
 
 if __name__ == '__main__':
-    fname = input('Enter data filename (default: most recent): ') or 'most recent' # 'data/test1.pkl'
+    fname = input('Enter data filename (default: most recent): ') or 'most recent'
     color = input('color by? (default: w) ') or 'w'
     data, kwargs, fname = load(fname)
     df, _, kwargs = build_df(data, kwargs)

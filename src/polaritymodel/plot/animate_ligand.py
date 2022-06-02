@@ -1,6 +1,4 @@
-from unittest import skip
 import plotly.express as px
-
 from .plotcore import load, build_df
 
 
@@ -29,6 +27,6 @@ if __name__ == '__main__':
     skipframes = input('plot ever n frames? (default: 1) ') or 1
     color = input('color by? (default: x1) ') or 'x1'
     data, kwargs, fname = load(fname)
-    df, df_lig, kwargs = build_df(data, kwargs, skipframes = int(skipframes))
+    _, df_lig, kwargs = build_df(data, kwargs, skipframes = int(skipframes))
     fig = plot(df_lig, color=color)
     save(fig, fname)
