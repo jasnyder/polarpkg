@@ -21,6 +21,7 @@ class PolarPDE(PolarWNT):
                  hill_k=0.55,
                  grid_N=100,
                  grid_dx=0.5,
+                 beta_func_of_w_exponent=1,
                  **kwargs):
         self.bounding_radius_factor = bounding_radius_factor
         self.contact_radius = contact_radius
@@ -37,6 +38,7 @@ class PolarPDE(PolarWNT):
         self.D = D                          # diffusion ratio of ligand vs. receptor
         self.grid_N = grid_N                # number of gridpoints in each dimension
         self.grid_dx = grid_dx              # spatial distance between adjacent gridpoints
+        self.beta_func_of_w_exponent = beta_func_of_w_exponent
         # initialize a 3d tensor to hold the ligand level in space
         self.L = torch.zeros(
             (self.grid_N, self.grid_N, self.grid_N), device=self.device)
@@ -255,7 +257,7 @@ class PolarPDE(PolarWNT):
             else:
                 self.w = self.w * np.exp(self.dt * self.wnt_decay)
             if beta_func_of_w:
-                self.beta = self.w.detach().clone() ** 1
+                self.beta = self.w.detach().clone() ** self.beta_func_of_w_exponent
 
             if tstep % self.yield_every == 0:
                 print(self.R.min(), self.R.max(),
