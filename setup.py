@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="polaritymodel-jasnyder",
-    version="0.0.3",
+    version="0.0.4",
     author="Jordan Snyder",
     author_email="snydrew@gmail.com",
     description="A package for running the cell polarity model",

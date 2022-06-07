@@ -257,7 +257,8 @@ class PolarPDE(PolarWNT):
             else:
                 self.w = self.w * np.exp(self.dt * self.wnt_decay)
             if beta_func_of_w:
-                self.beta = self.w.detach().clone() ** self.beta_func_of_w_exponent
+                www = self.w.detach().clone()
+                self.beta = ((www - www.min())/(www.max() - www.min())) ** self.beta_func_of_w_exponent
 
             if tstep % self.yield_every == 0:
                 print(self.R.min(), self.R.max(),
