@@ -42,7 +42,9 @@ def build_df(data, kwargs=None, skipframes=1):
                       if the data did not have ligand information, this return value will be None
         kwargs = pass-through of the kwargs that were inputted
     """
-    if len(data[0])==4:
+    if isinstance(data, dict):
+        return build_df_from_dict(data, kwargs, skipframes)
+    elif len(data[0])==4:
         # data came from a Polar instance
         # variables are x, p, q, lam
         return build_df_plain(data, kwargs, skipframes)
@@ -61,6 +63,19 @@ def build_df(data, kwargs=None, skipframes=1):
         # data came from a PolarPattern instance, including 'counts'
         # variables are x, p, q, w, lam, L, counts
         return build_dfs_wnt_ligand_counts(data, kwargs, skipframes)
+
+def build_df_from_dict(data, kwargs=None, skipframes=1):
+    df = data['df']
+    lig = data['lig']
+    if skipframes > 1:
+        df = df.loc[df.t.isin(pd.unique(df.t)[0:-1:skipframes])]
+        if isinstance(lig, pd.DataFrame):
+            lig = lig.loc[lig.t.isin(pd.unique(lig.t)[0:-1:skipframes])]
+        elif isinstance(lig, np.ndarray):
+            lig = lig[0:-1:skipframes]
+    return df, lig, kwargs
+
+    
 
 def build_df_plain(data, kwargs=None, skipframes=1):
     # create dataframe

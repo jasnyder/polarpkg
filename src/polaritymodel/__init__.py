@@ -2,7 +2,7 @@
 Python package for running and visualizing the polarity model of organoid growth
 """
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 # get main classes into top-level namespace
 from .polarcore import Polar, PolarWNT
