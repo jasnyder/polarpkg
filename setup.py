@@ -22,7 +22,7 @@ def get_version(rel_path: str) -> str:
 
 
 setuptools.setup(
-    name="polaritymodel-jasnyder",
+    name="polaritymodel",
     version=get_version("src/polaritymodel/__init__.py"),
     author="Jordan Snyder",
     author_email="snydrew@gmail.com",
