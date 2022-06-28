@@ -1,3 +1,4 @@
+import os
 import plotly.express as px
 from .plotcore import load, build_df
 
@@ -17,7 +18,7 @@ def plot(df, color = 'x1'):
 
 
 def save(fig, fname):
-    fig.write_html(fname.replace('data','animations').replace('.pkl','.html'), include_plotlyjs='directory',
+    fig.write_html(os.path.join('animations', os.path.basename(fname)).replace('.pkl','.html'), include_plotlyjs='directory',
                    full_html=False, animation_opts={'frame': {'duration': 50}})
 
 

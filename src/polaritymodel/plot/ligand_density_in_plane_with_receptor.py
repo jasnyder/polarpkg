@@ -1,3 +1,4 @@
+import os
 from .plotcore import load, build_df, select
 
 import pandas as pd
@@ -26,7 +27,7 @@ def plot(df, normal_vector, offset, width):
     
 
 def save(fig, fname, T_plot):
-    fig.write_html(fname.replace('data','animations').replace('.pkl',f'_ligand_heatmap_t-{T_plot}.html'), include_plotlyjs='directory',
+    fig.write_html(os.path.join('animations', os.path.basename(fname)).replace('.pkl',f'_ligand_heatmap_t-{T_plot}.html'), include_plotlyjs='directory',
                    full_html=False)
     return
 

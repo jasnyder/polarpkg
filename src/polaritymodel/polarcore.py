@@ -2,6 +2,10 @@ import numpy as np
 import torch
 from scipy.spatial.kdtree import KDTree
 import torch.linalg as la
+import itertools
+import time
+import pickle
+from .plot.plotcore import build_df
 # import time
 
 
@@ -27,7 +31,6 @@ def dd_factory(start_time, rate, max_cells):
         else:
             return False
     return division_decider
-
 
 def mvee(points, tol=0.0001):
     """
@@ -589,7 +592,6 @@ class Polar:
 
         return True
 
-
 class PolarWNT(Polar):
     def __init__(self, *args, wnt_cells = None, wnt_threshold = 1e-2, wnt_decay = 0, **kwargs):
         self.wnt_cells = wnt_cells
@@ -971,3 +973,33 @@ class PolarWNT(Polar):
         self.q.requires_grad = True
 
         return True
+
+def run_and_save(sim, runner, timesteps, yield_every, max_cells, fname_out):
+    # Running the simulation
+    data = []  # For storing data
+    i = 0
+    t1 = time.time()
+    print('Starting')
+
+    for line in itertools.islice(runner, timesteps):
+        i += 1
+        print(
+            f'Running {i} of {timesteps}   ({yield_every * i} of {yield_every * timesteps})   ({len(line[0])} cells)')
+        data.append(line)
+        df, lig, kwargs = build_df(data, sim.__dict__)
+
+        if len(line[0]) > max_cells:
+            print('Stopping')
+            break
+
+        with open(fname_out+'-in-progress.pkl', 'wb') as f:
+            pickle.dump({'df':df, 'lig':lig, 'kwargs':kwargs}, f)
+
+    time.sleep(1)
+
+    with open(fname_out+f'{time.strftime("%d%b%Y-%H-%M-%S")}.pkl', 'wb') as f:
+        df, lig, kwargs = build_df(data, sim.__dict__)
+        pickle.dump({'df':df, 'lig':lig, 'kwargs':kwargs}, f)
+
+    print(f'Simulation done, saved {timesteps} datapoints')
+    print('Took', time.time() - t1, 'seconds')

@@ -17,10 +17,11 @@ def load(fname):
         fname = max_file
     print('Loading data from file '+fname)
     with open(fname, 'rb') as f:
+        contents = pickle.load(f)
         try:
-            data, kwargs = pickle.load(f)
+            data, kwargs = contents
         except ValueError:
-            data = pickle.load(f)  # contains x, p, q, lam
+            data = contents  # contains x, p, q, lam
             kwargs = None
     # data[t][0] == x, x[i, k] = position of particle i in dimension k
     # data[t][1] == p, p[i, k] = AB polarity of particle i in dimension k
@@ -42,6 +43,9 @@ def build_df(data, kwargs=None, skipframes=1):
                       if the data did not have ligand information, this return value will be None
         kwargs = pass-through of the kwargs that were inputted
     """
+    if len(data)==0:
+        raise ValueError('No data to collect')
+
     if isinstance(data, dict):
         return build_df_from_dict(data, kwargs, skipframes)
     elif len(data[0])==4:
@@ -67,6 +71,8 @@ def build_df(data, kwargs=None, skipframes=1):
 def build_df_from_dict(data, kwargs=None, skipframes=1):
     df = data['df']
     lig = data['lig']
+    if kwargs in data.keys():
+        kwargs = data['kwargs']
     if skipframes > 1:
         df = df.loc[df.t.isin(pd.unique(df.t)[0:-1:skipframes])]
         if isinstance(lig, pd.DataFrame):

@@ -1,6 +1,7 @@
 """
 This file is to plot the density of ligand in the case that the ligand is modeled by a PDE instead of particles
 """
+import os
 from .plotcore import load, build_df
 import plotly.express as px
 
@@ -11,7 +12,7 @@ def plot(L, axis, index):
 
 
 def save(fig, fname):
-    fig.write_html(fname.replace('data', 'animations').replace('.pkl', f'_ligand_density_pde.html'),
+    fig.write_html(os.path.join('animations',os.path.basename(fname)).replace('.pkl', f'_ligand_density_pde.html'),
                    include_plotlyjs='directory',
                    full_html=False)
     return

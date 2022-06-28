@@ -1,3 +1,4 @@
+import os
 from .plotcore import load, select, build_df
 import plotly.graph_objects as go
 
@@ -20,7 +21,7 @@ def plot(df):
     return fig
 
 def save(fig, fname):
-    fig.write_html(fname.replace('data','animations').replace('.pkl','_vectorfield.html'),
+    fig.write_html(os.path.join('animations', os.path.basename(fname)).replace('.pkl','_vectorfield.html'),
                    include_plotlyjs='directory', full_html=False, animation_opts={'frame': {'duration': 100}})
 
 if __name__ == "__main__":
