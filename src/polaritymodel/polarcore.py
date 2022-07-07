@@ -987,6 +987,8 @@ def run_and_save(sim, runner, timesteps, yield_every, max_cells, fname_out):
             f'Running {i} of {timesteps}   ({yield_every * i} of {yield_every * timesteps})   ({len(line[0])} cells)')
         data.append(line)
         df, lig, kwargs = build_df(data, sim.__dict__)
+        if kwargs is None:
+            print('kwargs is none!! help!!!')
 
         if len(line[0]) > max_cells:
             print('Stopping')

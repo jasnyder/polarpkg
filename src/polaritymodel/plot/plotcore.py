@@ -18,11 +18,17 @@ def load(fname):
     print('Loading data from file '+fname)
     with open(fname, 'rb') as f:
         contents = pickle.load(f)
-        try:
-            data, kwargs = contents
-        except ValueError:
-            data = contents  # contains x, p, q, lam
-            kwargs = None
+        if isinstance(contents, dict):
+            if contents.keys() == {'df','lig','kwargs'}:
+                data = contents
+                kwargs = contents['kwargs']
+        elif isinstance(contents, (list,tuple)):
+            if len(contents)==2:
+                if isinstance(contents[1], dict):
+                    data, kwargs = contents
+            else:
+                data = contents  # contains x, p, q, lam
+                kwargs = None
     # data[t][0] == x, x[i, k] = position of particle i in dimension k
     # data[t][1] == p, p[i, k] = AB polarity of particle i in dimension k
     # data[t][2] == q, q[i, k] = PCP of particle i in dimension k
@@ -71,8 +77,11 @@ def build_df(data, kwargs=None, skipframes=1):
 def build_df_from_dict(data, kwargs=None, skipframes=1):
     df = data['df']
     lig = data['lig']
-    if kwargs in data.keys():
-        kwargs = data['kwargs']
+    if kwargs is None:
+        try:
+            kwargs = data['kwargs']
+        except KeyError:
+            kwargs = None
     if skipframes > 1:
         df = df.loc[df.t.isin(pd.unique(df.t)[0:-1:skipframes])]
         if isinstance(lig, pd.DataFrame):
