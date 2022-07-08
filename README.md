@@ -22,10 +22,11 @@ This should install the package. You should then be able to import it in Python 
 import polaritymodel
 ```
 
-In the near-ish future (i.e. once I clean the code up enough) I will add this package to [PyPI](https://pypi.org/), at which point it can be installed by simply running
+There is a version of this package on [PyPI](https://pypi.org/), at which can be installed by simply running
 ```
 python3 -m pip install polaritymodel
 ```
+You can view the PyPI version [here](https://pypi.org/project/polaritymodel/)
 
 # Requirements
 The code relies essentially on `torch` for the heavy lifitng of the simulation, and benefits greatly from usage of a GPU. If your system does not support CUDA, be sure to run the code with the `device='cpu'` keyword (passed on creation of a `Polar`,`PolarWNT`, or `PolarPDE` object).
